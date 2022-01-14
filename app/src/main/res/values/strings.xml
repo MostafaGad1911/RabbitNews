@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Grand</string>
+    <string name="kotlin_news">Kotlin News</string>
+    <string name="exit_warn">To exit the application, press again</string>
+
+    // Errors
+    <string name="timeout">Timeout - Please check your internet connection</string>
+    <string name="internet_connection">Unable to make a connection. Please check your internet</string>
+    <string name="connection_shutdown">Connection shutdown. Please check your internet</string>
+    <string name="server_un_reach">Server is unreachable, please try again later.</string>
+    <string name="server_error">Server error… please try again</string>
+
+</resources>
