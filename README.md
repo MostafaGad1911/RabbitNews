@@ -2,7 +2,7 @@
 Load news in recycler view with cashing 
 
 ## Used dependecies 
-            RxJava3 , Realm , Retrofit , ShimmerLayout
+            RxJava3 , Realm , Navigation component , Retrofit , ShimmerLayout
 ## Pattern 
             MVVM
 ## Kotlin keywords 
