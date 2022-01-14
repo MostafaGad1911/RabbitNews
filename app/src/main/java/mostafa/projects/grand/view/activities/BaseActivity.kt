@@ -43,5 +43,23 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
 
+    fun doubleClickExitApp() {
+        if (doubleBackToExitPressedOnce) {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_HOME)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        } else {
+            Toast.makeText(
+                this,
+                resources.getString(NewsString.exit_warn),
+                Toast.LENGTH_SHORT
+            )
+                .show()
+            doubleBackToExitPressedOnce = true
+        }
+    }
+
+
 
 }

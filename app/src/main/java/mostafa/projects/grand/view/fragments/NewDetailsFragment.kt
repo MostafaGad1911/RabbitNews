@@ -2,18 +2,20 @@ package mostafa.projects.grand.view.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavOptions
 import mostafa.projects.grand.data.remote.locale.ChildOffline
 import mostafa.projects.grand.data.remote.model.Child
 import mostafa.projects.grand.databinding.FragmentNewDetailsBinding
 import mostafa.projects.grand.utils.*
+import mostafa.projects.grand.viewModels.NewsViewModel
 
 
 class NewDetailsFragment : BaseFragment() {
 
     private lateinit var newsDetailsBinding: FragmentNewDetailsBinding
-    private val childDetails: Child by lazy { arguments?.getSerializable("article") as Child }
-    private val childOfflineDetails: ChildOffline by lazy { arguments?.getSerializable("article_offline") as ChildOffline }
+    val newsDataViewModel: NewsViewModel by activityViewModels()
 
     override fun getLayoutResource(): View {
         return newsDetailsBinding.root
@@ -24,26 +26,28 @@ class NewDetailsFragment : BaseFragment() {
         super.goBack(NewsId.newsHomeFragment, args, options)
     }
 
+
     override fun initViews() {
-        if (arguments?.containsKey("article") == true) {
-            if (childDetails.data?.secure_media?.oembed?.thumbnail_url != null) {
+        newsDataViewModel.selectedNewChildLiveData.observe(this , Observer {
+            if (it.data?.secure_media?.oembed?.thumbnail_url != null) {
                 newsDetailsBinding.newsDetailsThumbnailImg.show()
-                newsDetailsBinding.newsDetailsThumbnailImg.displayImg(source = childDetails.data?.secure_media?.oembed?.thumbnail_url!!)
+                newsDetailsBinding.newsDetailsThumbnailImg.displayImg(source = it.data?.secure_media?.oembed?.thumbnail_url!!)
             } else {
                 newsDetailsBinding.newsDetailsThumbnailImg.hide()
             }
-            newsDetailsBinding.newsBodyTxt.text = childDetails.data?.title?.capitalize()
+            newsDetailsBinding.newsBodyTxt.text = it.data?.title?.capitalize()
 
-        }else {
-            if (childOfflineDetails?.thumbnail_url != null) {
+        })
+        newsDataViewModel.selectedOfflineChildLiveData.observe(this , Observer {
+            if (it?.thumbnail_url != null) {
                 newsDetailsBinding.newsDetailsThumbnailImg.show()
-                newsDetailsBinding.newsDetailsThumbnailImg.displayImg(source = childOfflineDetails?.thumbnail_url!!)
+                newsDetailsBinding.newsDetailsThumbnailImg.displayImg(source = it?.thumbnail_url!!)
             } else {
                 newsDetailsBinding.newsDetailsThumbnailImg.hide()
             }
-            newsDetailsBinding.newsBodyTxt.text = childOfflineDetails?.title?.capitalize()
+            newsDetailsBinding.newsBodyTxt.text = it?.title?.capitalize()
 
-        }
+        })
     }
 
     override fun init() {
@@ -51,7 +55,8 @@ class NewDetailsFragment : BaseFragment() {
     }
 
     override fun onLeave() {
-
+        newsDataViewModel.selectedNewChildLiveData.removeObservers(this)
+        newsDataViewModel.selectedOfflineChildLiveData.removeObservers(this)
     }
 
 }

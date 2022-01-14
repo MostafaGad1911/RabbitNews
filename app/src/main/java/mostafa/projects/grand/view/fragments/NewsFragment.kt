@@ -3,6 +3,7 @@ package mostafa.projects.grand.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -26,7 +27,7 @@ import mostafa.projects.grand.view.adapter.NewsChildrenOfflineAdapter
 class NewsFragment : BaseFragment(), NewController, NewOfflineController {
 
     lateinit var newsBinding: FragmentNewsBinding
-    val newsDataViewModel: NewsViewModel by viewModels()
+    val newsDataViewModel: NewsViewModel by activityViewModels()
     lateinit var realm: Realm
 
     override fun getLayoutResource(): View {
@@ -112,9 +113,8 @@ class NewsFragment : BaseFragment(), NewController, NewOfflineController {
     }
 
     override fun displayFullArticle(child: Child) {
-        var bundle = Bundle()
-        bundle.putSerializable("article", child)
-        findNavController().navigate(NewsId.newsDetailsFragment, bundle, option)
+        newsDataViewModel.selectedChildData.postValue(child)
+        findNavController().navigate(NewsId.newsDetailsFragment, null, option)
     }
 
     private fun clearCash() {
@@ -142,9 +142,8 @@ class NewsFragment : BaseFragment(), NewController, NewOfflineController {
     }
 
     override fun displayFullArticle(child: ChildOffline) {
-        var bundle = Bundle()
-        bundle.putSerializable("article_offline", child)
-        findNavController().navigate(NewsId.newsDetailsFragment, bundle, option)
+        newsDataViewModel.selectedOfflineChildData.postValue(child)
+        findNavController().navigate(NewsId.newsDetailsFragment, null, option)
     }
 
 

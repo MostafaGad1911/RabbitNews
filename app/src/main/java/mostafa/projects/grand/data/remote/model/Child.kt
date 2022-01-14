@@ -6,7 +6,7 @@ import java.io.Serializable
 
 
 
-class Child :  Serializable {
+class Child  {
     var childId: Int? = null
     val data: ChildData? = null
 
