@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableObserver
-import mostafa.projects.grand.data.apis.NewsRepository
-import mostafa.projects.grand.data.model.Child
-import mostafa.projects.grand.data.model.NewsModel
+import mostafa.projects.grand.data.remote.apis.NewsRepository
+import mostafa.projects.grand.data.remote.model.Child
+import mostafa.projects.grand.data.remote.model.NewsModel
 import mostafa.projects.grand.utils.getMessage
 import mostafa.projects.grand.utils.SingleLiveEvent
 import mostafa.projects.grand.utils.getErrorMessage

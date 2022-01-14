@@ -8,12 +8,12 @@
     <fragment
         android:id="@+id/newsHomeFragment"
         android:name="mostafa.projects.grand.view.fragments.NewsFragment"
-        android:label="fragment_home"
+        android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/newsDetailsFragment"
         android:name="mostafa.projects.grand.view.fragments.NewDetailsFragment"
-        android:label="fragment_favorite"
+        android:label="fragment_details"
         tools:layout="@layout/fragment_new_details" />
 
 </navigation>

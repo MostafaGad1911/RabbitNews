@@ -7,18 +7,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import mostafa.projects.grand.data.remote.locale.ChildOffline
 import mostafa.projects.grand.data.remote.model.Child
 import mostafa.projects.grand.interfaces.NewController
+import mostafa.projects.grand.interfaces.NewOfflineController
 import mostafa.projects.grand.utils.*
 
-class NewsChildrenAdapter(
+class NewsChildrenOfflineAdapter(
     var ctx: Context,
-    var childslist: ArrayList<Child>,
-    var newsController: NewController
+    var childslist: List<ChildOffline>,
+    var newsController: NewOfflineController
 ) :
-    RecyclerView.Adapter<NewsChildrenAdapter.NewsChildHolder>() {
+    RecyclerView.Adapter<NewsChildrenOfflineAdapter.NewsChildHolder>() {
 
-    var _newController:NewController = newsController
+    var _newController: NewOfflineController = newsController
 
     class NewsChildHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var newTitleTxt: TextView = itemView.findViewById(NewsId.newTitleTxt)
@@ -42,13 +44,13 @@ class NewsChildrenAdapter(
 
     override fun onBindViewHolder(holder: NewsChildHolder, position: Int) {
         var newsChild = childslist.get(position)
-        if (newsChild.data?.secure_media?.oembed?.thumbnail_url != null) {
+        if (newsChild?.thumbnail_url != null) {
             holder.newsThumbnailImg.show()
-            holder.newsThumbnailImg.displayImg(source = newsChild.data?.secure_media?.oembed?.thumbnail_url!!)
+            holder.newsThumbnailImg.displayImg(source = newsChild?.thumbnail_url!!)
         } else {
             holder.newsThumbnailImg.hide()
         }
-        holder.newTitleTxt.text = newsChild.data?.title?.capitalize()
+        holder.newTitleTxt.text = newsChild?.title?.capitalize()
         holder.itemView.setOnClickListener { _newController.displayFullArticle(child = newsChild) }
 
     }

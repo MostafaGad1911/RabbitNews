@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'realm-android'
 }
 
 android {
@@ -32,6 +33,9 @@ android {
         }
 
     }
+    realm {
+        syncEnabled = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -52,6 +56,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     implementation 'androidx.test:core-ktx:1.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.databinding:adapters:3.2.0-alpha11'
     // Okhttp3
     def okHttp3_version = '4.9.0'
     implementation "com.squareup.okhttp3:okhttp:$okHttp3_version"
@@ -71,12 +76,17 @@ dependencies {
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    // Dagger 2
+    implementation 'com.google.dagger:dagger:2.24'
+    kapt 'com.google.dagger:dagger-compiler:2.23'
+
 
     // Glide for images from apis
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     // Shimmer loading effect
     implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'

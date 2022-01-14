@@ -1,6 +1,7 @@
 package mostafa.projects.grand.utils
 
 import android.app.Activity
+import android.content.res.Resources
 import android.os.NetworkOnMainThreadException
 import android.system.ErrnoException
 import android.view.View
@@ -59,28 +60,27 @@ fun ResponseBody.getErrorMessage(): String {
 
 fun Throwable.getMessage(): String {
     var msg = ""
-    var ctx = GrandApp.currentActivity()
     when (this) {
         is SocketTimeoutException -> {
-            msg = ctx.getString(NewsString.timeout)
+            msg = "Timeout - Please check your internet connection"
         }
         is UnknownHostException -> {
-            msg = ctx.getString(NewsString.internet_connection)
+            msg = "Unable to make a connection. Please check your internet"
         }
         is NetworkOnMainThreadException -> {
-            msg = ctx.getString(NewsString.internet_connection)
+            msg = "Unable to make a connection. Please check your internet"
         }
         is ConnectException -> {
-            msg = ctx.getString(NewsString.internet_connection)
+            msg = "Unable to make a connection. Please check your internet"
         }
         is ConnectionShutdownException -> {
-            msg = ctx.getString(NewsString.connection_shutdown)
+            msg = "Connection shutdown. Please check your internet"
         }
         is ErrnoException -> {
-            msg = ctx.getString(NewsString.connection_shutdown)
+            msg = "Connection shutdown. Please check your internet"
         }
         is IOException -> {
-            msg = ctx.getString(NewsString.server_un_reach)
+            msg = "Server is unreachable, please try again later."
         }
         is IllegalStateException -> {
             msg = "${this.message}"

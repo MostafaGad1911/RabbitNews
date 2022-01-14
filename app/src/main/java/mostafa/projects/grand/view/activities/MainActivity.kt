@@ -61,8 +61,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             controller.currentDestination?.id
         if (currentFragment == NewsId.newsDetailsFragment) {
             controller.navigate(NewsId.newsHomeFragment, null, options)
-        } else {
-            doubleClickExitApp()
         }
 
     }

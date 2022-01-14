@@ -53,9 +53,15 @@ abstract class BaseFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        onLeave()
+    }
+
     abstract fun getLayoutResource(): View // Inflate layout resource
     abstract fun initViews() // init ui views
     abstract fun init() // init objects for custom uses
+    abstract fun onLeave()
     open fun goBack(fragment: Int? = null, args: Bundle? = null, options: NavOptions? = option) {
         if (fragment != null) {
             findNavController().navigate(fragment, args, options)

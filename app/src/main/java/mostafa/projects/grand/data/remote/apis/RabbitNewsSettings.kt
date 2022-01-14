@@ -1,4 +1,4 @@
-package mostafa.projects.grand.data.apis
+package mostafa.projects.grand.data.remote.apis
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
